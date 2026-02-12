@@ -1,7 +1,7 @@
 import { Link } from '@tanstack/react-router'
 
 import { useState } from 'react'
-import { Home, Menu, X } from 'lucide-react'
+import { Home, Info, Menu, ShoppingBag, X } from 'lucide-react'
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
@@ -34,7 +34,6 @@ export default function Header() {
         }`}
       >
         <div className="flex items-center justify-between p-4 border-b border-gray-700">
-          <h2 className="text-xl font-bold">Navigation</h2>
           <button
             onClick={() => setIsOpen(false)}
             className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
@@ -56,6 +55,30 @@ export default function Header() {
           >
             <Home size={20} />
             <span className="font-medium">Home</span>
+          </Link>
+          <Link
+            to="/products"
+            onClick={() => setIsOpen(false)}
+            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
+            activeProps={{
+              className:
+                'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
+            }}
+          >
+            <ShoppingBag size={20} />
+            <span className="font-medium">Products</span>
+          </Link>
+          <Link
+            to="/about"
+            onClick={() => setIsOpen(false)}
+            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
+            activeProps={{
+              className:
+                'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
+            }}
+          >
+            <Info size={20} />
+            <span className="font-medium">About</span>
           </Link>
         </nav>
       </aside>
