@@ -1,10 +1,13 @@
 import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 import Header from '../components/Header'
 
 import appCss from '../styles.css?url'
+
+const queryClient = new QueryClient()
 
 export const Route = createRootRoute({
   head: () => ({
@@ -38,20 +41,22 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body className="bg-white dark:bg-black text-black dark:text-white">
-        <Header />
-        <main className="min-h-screen">{children}</main>
-        <TanStackDevtools
-          config={{
-            position: 'bottom-right',
-          }}
-          plugins={[
-            {
-              name: 'Tanstack Router',
-              render: <TanStackRouterDevtoolsPanel />,
-            },
-          ]}
-        />
-        <Scripts />
+        <QueryClientProvider client={queryClient}>
+          <Header />
+          <main className="min-h-screen">{children}</main>
+          <TanStackDevtools
+            config={{
+              position: 'bottom-right',
+            }}
+            plugins={[
+              {
+                name: 'Tanstack Router',
+                render: <TanStackRouterDevtoolsPanel />,
+              },
+            ]}
+          />
+          <Scripts />
+        </QueryClientProvider>
       </body>
     </html>
   )
