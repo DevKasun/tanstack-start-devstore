@@ -17,10 +17,7 @@ function App() {
           <Suspense fallback={<div>Loading...</div>}>
             <FeaturedProducts />
           </Suspense>
-          <Link
-            to="/products"
-            className="block mt=8 underline text-blue-500 hover:text-blue-700"
-          >
+          <Link to="/products" className="block mt=8 underline text-blue-500">
             See all the Products
           </Link>
         </div>

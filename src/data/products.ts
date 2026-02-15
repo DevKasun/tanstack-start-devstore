@@ -43,9 +43,18 @@ const allProducts = (() => {
 
 export const getProducts = createServerFn({
   method: 'GET',
-}).handler(() => {
-  return allProducts
 })
+  .inputValidator((search: string | undefined) => search)
+  .handler(({ data }) => {
+    let products = allProducts
+    if (data?.q) {
+      const searchConst = data.q.toLowerCase()
+      products = products.filter((product) =>
+        product.name.toLowerCase().includes(searchConst),
+      )
+    }
+    return products
+  })
 
 export const getFeaturedProducts = createServerFn({
   method: 'GET',
