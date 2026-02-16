@@ -1,5 +1,5 @@
 import { Suspense } from 'react'
-import { createFileRoute, Link } from '@tanstack/react-router'
+import { Link, createFileRoute } from '@tanstack/react-router'
 import ProductList from '@/components/ProductList'
 
 export const Route = createFileRoute('/products')({
