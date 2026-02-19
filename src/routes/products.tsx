@@ -21,7 +21,7 @@ function RouteComponent() {
     const timer = setTimeout(() => {
       navigate({
         search: (prev) => ({ ...prev, q: search || undefined }),
-        replace: true, // Don't add to history stack on every keystroke
+        replace: true,
       })
     }, 500)
 
