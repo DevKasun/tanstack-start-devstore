@@ -1,8 +1,12 @@
 import { Suspense, useEffect, useState } from 'react'
 import { Link, createFileRoute } from '@tanstack/react-router'
 import ProductList from '@/components/ProductList'
+import { z } from 'zod'
 
 export const Route = createFileRoute('/products')({
+  validateSearch: z.object({
+    q: z.string().optional().catch(''),
+  }),
   component: RouteComponent,
   loaderDeps: ({ search }) => ({ q: search.q }),
   loader: async ({ deps: { q } }) => ({ q }),
@@ -13,14 +17,13 @@ function RouteComponent() {
   const navigate = Route.useNavigate()
   const [search, setSearch] = useState(initialQ || '')
 
-  // Debounce search to avoid too many requests
   useEffect(() => {
     const timer = setTimeout(() => {
       navigate({
         search: (prev) => ({ ...prev, q: search || undefined }),
         replace: true, // Don't add to history stack on every keystroke
       })
-    }, 500) // 300ms debounce
+    }, 500)
 
     return () => clearTimeout(timer)
   }, [search, navigate])

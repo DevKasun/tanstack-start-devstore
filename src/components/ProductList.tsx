@@ -8,7 +8,7 @@ interface ProductListProps {
 const ProductList = ({ searchQuery }: ProductListProps) => {
   const { data: products, isFetching } = useSuspenseQuery({
     queryKey: ['products', searchQuery],
-    queryFn: () => getProducts({ data: { q: searchQuery } }),
+    queryFn: () => getProducts({ data: searchQuery || '' }),
   })
 
   return (
