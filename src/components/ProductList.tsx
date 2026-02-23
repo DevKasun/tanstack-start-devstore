@@ -1,5 +1,6 @@
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { getProducts } from '@/data/products'
+import { Link } from '@tanstack/react-router'
 
 interface ProductListProps {
   searchQuery?: string
@@ -32,6 +33,13 @@ const ProductList = ({ searchQuery }: ProductListProps) => {
               />
               <h3 className="text-lg font-bold">{product.name}</h3>
               <p className="text-green-600 font-bold">${product.price}</p>
+              <Link
+                to="/products/$productId"
+                params={{ productId: String(product.id) }}
+                className="text-blue-500 hover:underline text-sm"
+              >
+                View Details →
+              </Link>
             </div>
           ))}
         </div>

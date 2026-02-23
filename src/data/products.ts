@@ -44,7 +44,7 @@ const allProducts = (() => {
 export const getProducts = createServerFn({
   method: 'GET',
 })
-  .inputValidator((search: string | undefined) => search)
+  .inputValidator((search: { q?: string } | undefined) => search)
   .handler(({ data }) => {
     let products = allProducts
     if (data?.q) {
@@ -54,6 +54,16 @@ export const getProducts = createServerFn({
       )
     }
     return products
+  })
+
+export const getProduct = createServerFn({
+  method: 'GET',
+})
+  .inputValidator((id: number) => id)
+  .handler(({ data: id }) => {
+    const product = allProducts.find((p) => p.id === id)
+    if (!product) throw new Error(`Product with id ${id} not found`)
+    return product
   })
 
 export const getFeaturedProducts = createServerFn({
