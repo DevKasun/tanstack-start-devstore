@@ -14,7 +14,6 @@ function RouteComponent() {
       <Link to="/products" className="block mb-6 text-blue-500 hover:underline">
         ⬅️ Back to Products
       </Link>
-
       <div>
         <img
           src="/image-thumb.webp"
@@ -30,11 +29,10 @@ function RouteComponent() {
             ⭐ Featured
           </span>
         )}
-
-        <button className="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors">
-          Add to Cart
-        </button>
       </div>
+      <button className="mt-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors">
+        Add to Cart
+      </button>
     </div>
   )
 }
