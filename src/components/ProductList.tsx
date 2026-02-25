@@ -22,7 +22,7 @@ const ProductList = ({ searchQuery }: ProductListProps) => {
 
       {products.length === 0 ? (
         <div className="text-center py-12 text-gray-500">
-          `No products found matching "${searchQuery}"`
+          No products found matching "{searchQuery}"
         </div>
       ) : (
         <div className="grid grid-cols-3 gap-4">

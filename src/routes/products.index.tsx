@@ -26,7 +26,7 @@ function RouteComponent() {
     }, 500)
 
     return () => clearTimeout(timer)
-  }, [search, navigate])
+  }, [search])
 
   return (
     <div className="container py-8">
