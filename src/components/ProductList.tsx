@@ -15,7 +15,6 @@ const ProductList = ({ searchQuery }: ProductListProps) => {
 
   return (
     <div>
-      {/* Loading indicator for real-time feel */}
       {isFetching && searchQuery && (
         <div className="text-sm text-gray-500 mb-2">Searching...</div>
       )}

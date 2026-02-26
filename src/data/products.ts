@@ -1,4 +1,5 @@
 import { createServerFn } from '@tanstack/react-start'
+import { z } from 'zod'
 
 const productsData = [
   { id: 1, name: 'KL Keyboard', price: 250 },
@@ -41,10 +42,11 @@ const allProducts = (() => {
   return products
 })()
 
+// Get all the products
 export const getProducts = createServerFn({
   method: 'GET',
 })
-  .inputValidator((search: { q?: string } | undefined) => search)
+  .inputValidator(z.object({ q: z.string().optional() }).optional())
   .handler(({ data }) => {
     let products = allProducts
     if (data?.q) {
@@ -56,13 +58,14 @@ export const getProducts = createServerFn({
     return products
   })
 
+// Get a single product by id
 export const getProduct = createServerFn({
   method: 'GET',
 })
-  .inputValidator((id: number) => id)
-  .handler(({ data: id }) => {
-    const product = allProducts.find((p) => p.id === id)
-    if (!product) throw new Error(`Product with id ${id} not found`)
+  .inputValidator(z.object({ id: z.coerce.number().int().positive() }))
+  .handler(({ data }) => {
+    const product = allProducts.find((p) => p.id === data.id)
+    if (!product) throw new Error(`Product with id ${data.id} not found`)
     return product
   })
 
