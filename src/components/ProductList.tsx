@@ -1,4 +1,5 @@
 import { useSuspenseQuery } from '@tanstack/react-query'
+import { useServerFn } from '@tanstack/react-start'
 import { getProducts } from '@/data/products'
 import { Link } from '@tanstack/react-router'
 
@@ -7,10 +8,12 @@ interface ProductListProps {
 }
 
 const ProductList = ({ searchQuery }: ProductListProps) => {
+  const fetchProducts = useServerFn(getProducts)
+
   const { data: products, isFetching } = useSuspenseQuery({
     queryKey: ['products', searchQuery],
     queryFn: () =>
-      getProducts({ data: searchQuery ? { q: searchQuery } : undefined }),
+      fetchProducts({ data: searchQuery ? { q: searchQuery } : undefined }),
   })
 
   return (

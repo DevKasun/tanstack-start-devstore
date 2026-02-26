@@ -1,10 +1,13 @@
 import { useSuspenseQuery } from '@tanstack/react-query'
+import { useServerFn } from '@tanstack/react-start'
 import { getFeaturedProducts } from '@/data/products'
 
 const ProductList = () => {
+  const fetchFeaturedProducts = useServerFn(getFeaturedProducts)
+
   const { data: featuredProducts } = useSuspenseQuery({
     queryKey: ['featuredProducts'],
-    queryFn: getFeaturedProducts,
+    queryFn: fetchFeaturedProducts,
   })
 
   return (
