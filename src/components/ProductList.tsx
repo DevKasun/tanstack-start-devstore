@@ -5,16 +5,22 @@ import { Link } from '@tanstack/react-router'
 
 interface ProductListProps {
   searchQuery?: string
+  sort?: 'asc' | 'desc'
 }
 
-const ProductList = ({ searchQuery }: ProductListProps) => {
+const ProductList = ({ searchQuery, sort = 'asc' }: ProductListProps) => {
   const fetchProducts = useServerFn(getProducts)
 
-  const { data: products, isFetching } = useSuspenseQuery({
+  const { data: rawProducts, isFetching } = useSuspenseQuery({
     queryKey: ['products', searchQuery],
     queryFn: () =>
       fetchProducts({ data: searchQuery ? { q: searchQuery } : undefined }),
   })
+
+  // Sort is applied client-side using the typed `sort` value from the URL
+  const products = [...rawProducts].sort((a, b) =>
+    sort === 'asc' ? a.price - b.price : b.price - a.price,
+  )
 
   return (
     <div>

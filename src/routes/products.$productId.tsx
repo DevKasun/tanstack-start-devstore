@@ -12,7 +12,11 @@ function RouteComponent() {
 
   return (
     <div className="container py-8 max-w-2xl">
-      <Link to="/products" className="block mb-6 text-blue-500 hover:underline">
+      <Link
+        to="/products"
+        search={{ page: 1, sort: 'asc' }}
+        className="block mb-6 text-blue-500 hover:underline"
+      >
         ⬅️ Back to Products
       </Link>
       <div>
