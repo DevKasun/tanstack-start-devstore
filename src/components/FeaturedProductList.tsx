@@ -1,6 +1,6 @@
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { useServerFn } from '@tanstack/react-start'
-import { getFeaturedProducts } from '@/data/products'
+import { getFeaturedProducts, type Product } from '@/data/products'
 
 const ProductList = () => {
   const fetchFeaturedProducts = useServerFn(getFeaturedProducts)
@@ -12,7 +12,7 @@ const ProductList = () => {
 
   return (
     <div className="grid grid-cols-3 gap-4">
-      {featuredProducts.map((product) => (
+      {featuredProducts.map((product: Product) => (
         <div key={product.id} className="text-left border p-4 rounded-lg">
           <img
             src="image-thumb.webp"

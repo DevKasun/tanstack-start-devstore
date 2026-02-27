@@ -1,7 +1,6 @@
 import { createServerFn } from '@tanstack/react-start'
 import { z } from 'zod'
 
-// --- Zod schema for a single product ---
 export const productSchema = z.object({
   id: z.number().int().positive(),
   name: z.string().min(1),
