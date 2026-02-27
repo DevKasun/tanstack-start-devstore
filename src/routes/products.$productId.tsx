@@ -2,7 +2,8 @@ import { createFileRoute, Link } from '@tanstack/react-router'
 import { getProduct } from '@/data/products'
 
 export const Route = createFileRoute('/products/$productId')({
-  loader: ({ params }) => getProduct({ data: Number(params.productId) }),
+  loader: ({ params }) =>
+    getProduct({ data: { id: Number(params.productId) } }),
   component: RouteComponent,
 })
 

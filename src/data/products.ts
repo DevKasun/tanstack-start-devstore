@@ -1,6 +1,20 @@
 import { createServerFn } from '@tanstack/react-start'
 import { z } from 'zod'
 
+// --- Zod schema for a single product ---
+export const productSchema = z.object({
+  id: z.number().int().positive(),
+  name: z.string().min(1),
+  price: z.number().positive(),
+  isFeatured: z.boolean().optional(),
+})
+
+export const productsSchema = z.array(productSchema)
+
+// Inferred TypeScript type
+export type Product = z.infer<typeof productSchema>
+
+// Dummy data for products
 const productsData = [
   { id: 1, name: 'KL Keyboard', price: 250 },
   { id: 2, name: 'AI Powered Mouse', price: 80 },
@@ -24,8 +38,11 @@ const productsData = [
   { id: 20, name: 'Coffee Warmer', price: 30 },
 ]
 
+// Validate productsData at module load — throws if any entry is invalid
+const validatedProducts = productsSchema.parse(productsData)
+
 const allProducts = (() => {
-  const products = productsData.map((product) => ({
+  const products = validatedProducts.map((product) => ({
     ...product,
     isFeatured: false,
   }))
