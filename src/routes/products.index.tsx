@@ -78,7 +78,7 @@ function RouteComponent() {
           </button>
         </div>
 
-        {/* ── URL State Inspector (demo panel) ────────────────────────────── */}
+        {/* URL State Inspector */}
         <div className="mb-8 rounded-xl border border-dashed border-blue-300 bg-blue-50 p-4 text-sm font-mono">
           <p className="mb-2 text-xs font-sans font-semibold uppercase tracking-widest text-blue-400">
             🔍 URL State Inspector — live output of{' '}
@@ -88,11 +88,11 @@ function RouteComponent() {
           {/* What Zod parsed from the URL */}
           <pre className="text-blue-900 leading-relaxed">
             {`// Typed result — even after a bad URL like ?page=hello&sort=random
-{
-  q:    ${JSON.stringify(search || '')},
-  page: ${page},         ${page === 1 ? '← default (try ?page=hello in the URL)' : ''}
-  sort: "${sort}",  ${sort === 'asc' ? '← default (try ?sort=random in the URL)' : ''}
-}`}
+            {
+              q:    ${JSON.stringify(search || '')},
+              page: ${page},         ${page === 1 ? '← default (try ?page=hello in the URL)' : ''}
+              sort: "${sort}",  ${sort === 'asc' ? '← default (try ?sort=random in the URL)' : ''}
+            }`}
           </pre>
 
           <hr className="my-3 border-blue-200" />
