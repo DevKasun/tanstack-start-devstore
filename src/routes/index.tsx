@@ -17,7 +17,11 @@ function App() {
           <Suspense fallback={<div>Loading...</div>}>
             <FeaturedProducts />
           </Suspense>
-          <Link to="/products" className="block mt=8 underline text-blue-500">
+          <Link
+            to="/products"
+            search={{ page: 1, sort: 'asc' }}
+            className="block mt=8 underline text-blue-500"
+          >
             See all the Products
           </Link>
         </div>
